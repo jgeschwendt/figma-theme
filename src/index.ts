@@ -33,6 +33,7 @@ interface StyleDefinition {
   blendMode: string
   type: string
   color: Color
+  opacity?: number
 }
 
 interface Color {
@@ -91,12 +92,17 @@ function extractColor(defs: StyleDefinition[]): string {
   }
   const def = defs[0]
 
-  const {r, g, b, a} = def.color
+  // the color definition includes an alpha value, but in testing this was
+  // always `1` and the actual alpha was represented in the `opacity` property
+  // as a very imprecise float
+  const {r, g, b} = def.color
+  const a = def.opacity || 1
   const rgb = [r, g, b].map(i => i * 255)
   if (a === 1) {
     return chroma(rgb).hex()
   } else {
-    const rgba = rgb.concat([a])
+    const adjusted = Math.round(a * 100) / 100 // e.g. 0.699999988079071 -> 0.7
+    const rgba = rgb.concat([adjusted])
     return chroma(rgba).css()
   }
 }
