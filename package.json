@@ -6,11 +6,7 @@
   "bin": {
     "figma-theme": "./cli.js"
   },
-  "scripts": {
-    "start": "./cli.js JGLoPfwRFqCwn4xZ8wUmSwp7 --out-dir example",
-    "cover": "nyc report --reporter html",
-    "test": "nyc ava"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "Michelle Tilley <michelle@michelletilley.net>",
   "contributors": [
@@ -18,18 +14,13 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.4.1",
-    "chroma-js": "^1.3.7",
-    "dot-prop": "^4.2.0",
-    "dotenv": "^6.0.0",
-    "figma-js": "^1.4.0",
-    "meow": "^5.0.0",
-    "pkg-conf": "^2.1.0",
-    "superstruct": "^0.5.4",
-    "update-notifier": "^2.5.0"
+    "@types/chroma-js": "^2.0.0",
+    "@types/lodash": "^4.14.156",
+    "@types/node": "^14.0.13",
+    "chroma-js": "^2.1.0",
+    "lodash": "^4.17.15",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
   },
-  "devDependencies": {
-    "ava": "^0.25.0",
-    "nyc": "^12.0.2"
-  }
+  "devDependencies": {}
 }
