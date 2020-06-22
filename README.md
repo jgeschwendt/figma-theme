@@ -1,7 +1,7 @@
 
 # figma-theme
 
-Generate development-ready theme JSON files from Figma Styles
+Generate development-ready theme JSON files from Figma Styles. Forked from [jxnblk/figma-theme](https://github.com/jxnblk/figma-theme)) by Brent Jackson.
 
 - Parse [Styles][] from a Figma file ID
 - Works with [Styled System][] and other CSS-in-JS setups
