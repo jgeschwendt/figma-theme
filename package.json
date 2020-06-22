@@ -1,5 +1,5 @@
 {
-  "name": "figma-theme",
+  "name": "@primer/figma-theme",
   "version": "1.0.0-3",
   "description": "Generate development-ready theme JSON files from Figma Styles",
   "main": "index.js",
@@ -12,7 +12,10 @@
     "test": "nyc ava"
   },
   "keywords": [],
-  "author": "Brent Jackson",
+  "author": "Michelle Tilley <michelle@michelletilley.net>",
+  "contributors": [
+    "Brent Jackson"
+  ],
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
