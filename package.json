@@ -6,7 +6,9 @@
   "bin": {
     "figma-theme": "./cli.js"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "ts-mocha -p tsconfig.json test/**/*.test.ts"
+  },
   "keywords": [],
   "author": "Michelle Tilley <michelle@michelletilley.net>",
   "contributors": [
@@ -22,5 +24,11 @@
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "ts-mocha": "^7.0.0"
+  }
 }
