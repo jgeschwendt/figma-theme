@@ -1,6 +1,6 @@
 # @primer/figma-theme
 
-Generate a JSON representation of style colors from a Figma file. Forked from [jxnblk/figma-theme][fork] by Brent Jackson.
+Generate a JSON representation of style colors from a Figma file. Forked from [jxnblk/figma-theme][fork], which was created by [Brent Jackson][brent].
 
 ## Installation
 
@@ -116,5 +116,6 @@ $ figma-theme --pretty test/fixtures/figma-file.json
 ```
 
 [fork]: https://github.com/jxnblk/figma-theme
+[brent]: https://github.com/jxnblk
 [api]: https://www.figma.com/developers/api#files-endpoints
 [token]: https://www.figma.com/developers/docs#auth-dev-token
