@@ -1,4 +1,4 @@
-name: @primer/figma-theme
+name: Primer Figma Theme
 on: [pull_request]
 
 jobs:
