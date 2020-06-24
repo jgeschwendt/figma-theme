@@ -32,7 +32,7 @@ program.on('--help', () => {
         $ FIGMA_TOKEN=token figma-theme --id figma_file_id
 
     For more information, visit:
-      https://github.com/primer/figma-theme#readme'
+      https://github.com/primer/figma-theme#readme
   `)
 })
 
