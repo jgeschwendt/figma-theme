@@ -1,7 +1,7 @@
 import path from "path"
-import { parseFile } from "../src"
-import { assert, expect } from "chai"
+import { assert } from "chai"
 import { get } from "lodash"
+import { parseFile } from "../src"
 
 describe("parseFile", () => {
   let theme: any = null

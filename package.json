@@ -32,8 +32,10 @@
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
+    "@types/tmp": "^0.2.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.1",
+    "tmp": "^0.2.1",
     "ts-mocha": "^7.0.0"
   }
 }

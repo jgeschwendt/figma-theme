@@ -36,53 +36,57 @@ program.on('--help', () => {
   `)
 })
 
-program.parse(process.argv)
+export { program }
 
-const opts = program.opts() as Options
-const args = program.args
-const help = program.helpInformation()
+export default function execute(argv = process.argv) {
+  program.parse(process.argv)
 
-if (opts.id) {
-  if (args.length) {
+  const opts = program.opts() as Options
+  const args = program.args
+  const help = program.helpInformation()
+
+  if (opts.id) {
+    if (args.length) {
+      console.error(dedent`
+        Error: you may not specify an input file when using --id to specify a Figma file.
+
+        ${help}
+      `)
+      process.exit(1)
+    }
+
+    if (!process.env.FIGMA_TOKEN) {
+      console.error(dedent`
+        Error: the FIGMA_TOKEN environment variable must be set to download files from the
+        Figma API. Specify a token or use a .env file in the current directory with
+        FIGMA_TOKEN set.
+
+        For more information, visit:
+          https://github.com/primer/figma-theme#readme
+      `)
+      process.exit(1)
+    }
+
+    downloadAndParse(opts.id, process.env.FIGMA_TOKEN, opts)
+  } else if (args.length === 1) {
+    const input = args[0]
+
+    if (input === '-') {
+      consumeAndParseStream(process.stdin, opts)
+    } else {
+      parseFile(input, opts)
+    }
+  } else {
     console.error(dedent`
-      Error: you may not specify an input file when using --id to specify a Figma file.
+      Error: you must specify a file to parse or a Figma file to download.
 
       ${help}
     `)
     process.exit(1)
   }
-
-  if (!process.env.FIGMA_TOKEN) {
-    console.error(dedent`
-      Error: the FIGMA_TOKEN environment variable must be set to download files from the
-      Figma API. Specify a token or use a .env file in the current directory with
-      FIGMA_TOKEN set.
-
-      For more information, visit:
-        https://github.com/primer/figma-theme#readme
-    `)
-    process.exit(1)
-  }
-
-  downloadAndParse(opts.id, process.env.FIGMA_TOKEN, opts)
-} else if (args.length === 1) {
-  const input = args[0]
-
-  if (input === '-') {
-    consumeAndParseStream(process.stdin, opts)
-  } else {
-    parseFile(input, opts)
-  }
-} else {
-  console.error(dedent`
-    Error: you must specify a file to parse.
-
-    ${help}
-  `)
-  process.exit(1)
 }
 
-function downloadAndParse(figmaFileId: string, figmaToken: string, options: Options) {
+function downloadAndParse(figmaFileId: string, figmaToken: string, opts: Options) {
   const figmaFileUrl = `https://api.figma.com/v1/files/${figmaFileId}`
   const stream = request({
     url: figmaFileUrl,
@@ -106,6 +110,7 @@ function parseFile(filename: string, opts: Options) {
     consumeAndParseStream(stream, opts)
   } else {
     console.error(`The specified file does not exist: ${filename}`)
+    process.exit(1)
   }
 }
 
@@ -123,10 +128,17 @@ function parseString(data: string, opts: Options) {
       theme = stripMetadata(theme)
     }
 
+    let output = ""
     if (opts.pretty) {
-      console.log(JSON.stringify(theme, null, '  '))
+      output = JSON.stringify(theme, null, '  ')
     } else {
-      console.log(JSON.stringify(theme))
+      output = JSON.stringify(theme)
+    }
+
+    if (opts.out) {
+      fs.writeFileSync(opts.out, output, { encoding: 'utf8' })
+    } else {
+      console.log(output)
     }
   } catch (err) {
     if (err.name === 'SyntaxError') {
@@ -148,3 +160,4 @@ function streamToString (stream: Stream): Promise<string> {
     stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
   })
 }
+
