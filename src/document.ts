@@ -44,7 +44,16 @@ export interface DocumentNode {
   }
 }
 
-export function parseDocument(file: FigmaDocument) {
+interface Metadata extends StyleDeclaration {
+  id: string
+  color: string | null
+}
+
+export interface Theme {
+  [key: string]: Theme | Metadata | string | null
+}
+
+export function parseDocument(file: FigmaDocument): Theme {
   const styleIds = Object.keys(file.styles)
 
   const theme = {}
@@ -53,9 +62,6 @@ export function parseDocument(file: FigmaDocument) {
   for (const id of styleIds) {
     const styleDeclaration = file.styles[id]
     const nameParts = styleDeclaration.name.split("/").map(str => str.trim())
-    // if (!SECTIONS.includes(nameParts[0])) {
-    //   continue
-    // }
 
     const color = fetchColor(nodes, id)
 
