@@ -1,6 +1,6 @@
 # @primer/figma-theme
 
-Generate a JSON representation of style colors from a Figma file. Forked from [jxnblk/figma-theme][fork]) by Brent Jackson.
+Generate a JSON representation of style colors from a Figma file. Forked from [jxnblk/figma-theme][fork] by Brent Jackson.
 
 ## Installation
 
@@ -24,7 +24,7 @@ npm i @primer/figma-theme
 yarn add @primer/figma-theme
 ```
 
-If you've installed the package locally, you can run the binary with:
+If you've installed the package as a local dependency, you can run the binary with:
 
 ```sh
 ./node_modules/.bin/figma-theme
@@ -50,7 +50,7 @@ You can also use `-` to specify stdin as the source for the JSON data:
 
 ### Download from the Figma API
 
-If you specify your Figma [personal access token][token] via an environment variable or via a `.env` file, the CLI can contact the Figma API and export the file for you:
+If you specify your Figma [personal access token][token] via an environment variable or a `.env` file, the CLI can contact the Figma API and export the file for you:
 
 ```sh
 # using an environment variable
@@ -81,7 +81,7 @@ The styles in your Figma file must adhere to the following rules:
 
 - Create a nested structure by using `/` in your style names, e.g. `functional / text / primary` (spaces are optional)
 - Your style names must not contain a period
-- Every style you want to be a part of your theme must be used in the file - if a style is unused, its color will be `null`
+- Every style you want to be a part of your theme must be used in the file; if a style is unused, its color will be `null`
 
 ## Options
 
