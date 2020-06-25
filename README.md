@@ -127,8 +127,8 @@ yarn install
 # run tests
 yarn test
 
-# test the CLI
-./bin/cli-boot.js --options file
+# run the CLI
+./bin/cli-boot.js --help
 ```
 
 [fork]: https://github.com/jxnblk/figma-theme
