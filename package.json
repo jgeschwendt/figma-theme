@@ -7,7 +7,9 @@
     "figma-theme": "./bin/cli-boot.js"
   },
   "scripts": {
-    "test": "ts-mocha -p tsconfig.json test/**/*.test.ts"
+    "test": "ts-mocha -p tsconfig.json test/**/*.test.ts",
+    "test:fast": "yarn test -f '[slow]' -i",
+    "test:slow": "yarn test -f '[slow]'"
   },
   "keywords": [],
   "author": "Michelle Tilley <michelle@michelletilley.net>",

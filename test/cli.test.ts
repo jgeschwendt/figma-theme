@@ -26,7 +26,7 @@ async function execute(args: string, env: NodeJS.ProcessEnv = {}): Promise<CliRe
   })
 }
 
-describe("CLI", function() {
+describe("[slow] CLI", function() {
   this.slow(3000)
   this.timeout(20000)
 
