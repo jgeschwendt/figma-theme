@@ -32,7 +32,7 @@ If you've installed the package as a local dependency, you can run the binary wi
 ./node_modules/.bin/figma-theme
 ```
 
-## Basic Usage
+## Basic usage
 
 The CLI can parse JSON created from the [Figma API][api] and outputs JSON data to standard output.
 
