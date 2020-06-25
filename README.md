@@ -4,6 +4,8 @@ Generate a JSON representation of style colors from a Figma file. Forked from [j
 
 ## Installation
 
+`@primer/figma-theme` requires [Node.js][nodejs] 11.0 or higher.
+
 To use the command-line API, you may want to install the package globally:
 
 ```sh
@@ -133,6 +135,7 @@ yarn test
 
 [fork]: https://github.com/jxnblk/figma-theme
 [brent]: https://github.com/jxnblk
+[node]: https://nodejs.org
 [api]: https://www.figma.com/developers/api#files-endpoints
 [token]: https://www.figma.com/developers/docs#auth-dev-token
 [yarn]: https://yarnpkg.com/
