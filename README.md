@@ -116,7 +116,23 @@ $ figma-theme --pretty test/fixtures/figma-file.json
 }
 ```
 
+## Local development
+
+To develop locally, clone the repository and install the dependencies with [Yarn][yarn].
+
+```sh
+# install dependencies
+yarn install
+
+# run tests
+yarn test
+
+# test the CLI
+./bin/cli-boot.js --options file
+```
+
 [fork]: https://github.com/jxnblk/figma-theme
 [brent]: https://github.com/jxnblk
 [api]: https://www.figma.com/developers/api#files-endpoints
 [token]: https://www.figma.com/developers/docs#auth-dev-token
+[yarn]: https://yarnpkg.com/
