@@ -130,7 +130,9 @@ yarn install
 yarn test
 
 # run the CLI
-./bin/cli-boot.js --help
+./node_modules/.bin/ts-node ./src/cli-boot.ts --help
+# OR
+yarn cli --help
 ```
 
 [fork]: https://github.com/jxnblk/figma-theme

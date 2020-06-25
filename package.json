@@ -2,11 +2,15 @@
   "name": "@primer/figma-theme",
   "version": "0.0.5",
   "description": "Generate development-ready theme JSON files from Figma Styles",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
   "bin": {
-    "figma-theme": "./bin/cli-boot.js"
+    "figma-theme": "./dist/cli-boot.js"
   },
   "scripts": {
+    "prepublishOnly": "yarn build",
+    "prebuild": "rm -rf dist",
+    "build": "tsc && chmod +x ./dist/cli-boot.js",
+    "cli": "ts-node src/cli-boot.ts",
     "test": "ts-mocha -p tsconfig.json test/**/*.test.ts",
     "test:fast": "yarn test -f '[slow]' -i",
     "test:slow": "yarn test -f '[slow]'"
@@ -20,10 +24,10 @@
   "files": [
     "README.md",
     "LICENSE",
-    "bin",
-    "src",
+    "dist",
     "tsconfig.json"
   ],
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@types/chroma-js": "^2.0.0",
     "@types/dedent": "^0.7.0",
