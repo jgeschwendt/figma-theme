@@ -25,8 +25,8 @@ describe("parseFile", () => {
     'borders.black-fade-30',
   ]
 
-  beforeEach(() => {
-    theme = parseFile(path.join(__dirname, "fixtures", "figma-file.json"))
+  beforeEach(async () => {
+    theme = await parseFile(path.join(__dirname, "fixtures", "figma-file.json"))
   })
 
   it("creates a theme entry for every expected style", () => {

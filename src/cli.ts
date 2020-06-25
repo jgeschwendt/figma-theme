@@ -4,7 +4,7 @@ import { Command } from 'commander'
 import request from 'request'
 import dedent from 'dedent'
 import { Options } from './options'
-import { parseData, stripMetadata } from './index'
+import { parseStream, stripMetadata } from './index'
 const pkg = require('../package.json')
 
 import * as dotenv from 'dotenv'
@@ -119,14 +119,8 @@ function parseFile(filename: string, opts: Options) {
 }
 
 async function consumeAndParseStream(stream: Stream, opts: Options) {
-  const str = await streamToString(stream)
-  parseString(str, opts)
-}
-
-function parseString(data: string, opts: Options) {
   try {
-    const json = JSON.parse(data)
-    let theme = parseData(json)
+    let theme = await parseStream(stream)
 
     if (!opts.metadata) {
       theme = stripMetadata(theme)
@@ -156,12 +150,5 @@ function parseString(data: string, opts: Options) {
   }
 }
 
-function streamToString (stream: Stream): Promise<string> {
-  const chunks: Buffer[] = []
-  return new Promise((resolve, reject) => {
-    stream.on('data', chunk => chunks.push(chunk))
-    stream.on('error', reject)
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
-  })
+function parseString(data: string, opts: Options) {
 }
-

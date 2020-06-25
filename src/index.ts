@@ -1,20 +1,17 @@
+import * as fs from "fs"
+import { Stream } from "stream"
 import { FigmaDocument, parseDocument, Theme } from "./document"
-
-// const SECTIONS = [
-//   'functionals',
-//   'tinted',
-//   'component',
-//   'outlier',
-//   'color',
-// ]
+import { streamToString } from "./util"
 
 export function parseFile(filename: string) {
-  const file: FigmaDocument = require(filename)
-  return parseData(file)
+  const stream = fs.createReadStream(filename)
+  return parseStream(stream)
 }
 
-export function parseData(doc: FigmaDocument) {
-  return parseDocument(doc)
+export async function parseStream(stream: Stream): Promise<Theme> {
+  const str = await streamToString(stream)
+  const json = JSON.parse(str) as FigmaDocument
+  return parseDocument(json)
 }
 
 export function stripMetadata(theme: Theme): Theme {
