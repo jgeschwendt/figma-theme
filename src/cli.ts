@@ -16,7 +16,7 @@ program
   .storeOptionsAsProperties(false)
   .usage('[options] [<file>]')
   .option('-o, --out <file>', 'redirect output to the given file')
-  .option('--id <id>', 'download the Figma file with the given ID instead of using an input file')
+  .option('--fetch <id>', 'download the Figma file with the given ID instead of using an input file')
   .option('--pretty', 'pretty-print JSON output')
   .option('--metadata', 'resolve additional metadata for each style')
   .version(pkg.version, '-v, --version', 'output the current version')
@@ -33,7 +33,7 @@ program.on('--help', () => {
         $ ./my-export-script.sh | figma-theme -
 
       Parsing a Figma file by ID (requires Figma access token):
-        $ FIGMA_TOKEN=token figma-theme --id figma_file_id
+        $ FIGMA_TOKEN=token figma-theme --fetch figma_file_id
 
     For more information, visit:
       https://github.com/primer/figma-theme#readme
@@ -49,10 +49,10 @@ export default function execute(argv = process.argv) {
   const args = program.args
   const help = program.helpInformation()
 
-  if (opts.id) {
+  if (opts.fetch) {
     if (args.length) {
       console.error(dedent`
-        Error: you may not specify an input file when using --id to specify a Figma file.
+        Error: you may not specify an input file when using --fetch to specify a Figma file.
 
         ${help}
       `)
@@ -71,7 +71,7 @@ export default function execute(argv = process.argv) {
       process.exit(1)
     }
 
-    downloadAndParse(opts.id, process.env.FIGMA_TOKEN, opts)
+    downloadAndParse(opts.fetch, process.env.FIGMA_TOKEN, opts)
   } else if (args.length === 1) {
     const input = args[0]
 

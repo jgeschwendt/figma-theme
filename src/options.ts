@@ -1,6 +1,6 @@
 export interface Options {
   out?: string
-  id?: string
+  fetch?: string
   pretty?: boolean
   metadata?: boolean
 }

@@ -61,10 +61,10 @@ echo "FIGMA_TOKEN=asdf1234" > .env
 figma-theme ...
 ```
 
-To specify which file to export, use the `--id` option to specify a Figma file ID:
+To specify which file to export, use the `--fetch` option to specify a Figma file ID:
 
 ```sh
-FIGMA_TOKEN=asdf1234 figma-theme --id xRlnI4wD4TEQGzOERdUfJz
+FIGMA_TOKEN=asdf1234 figma-theme --fetch xRlnI4wD4TEQGzOERdUfJz
 ```
 
 To identify the Figma file ID, look at the part of the URL after `/file/`. For example, in the URL:
@@ -90,7 +90,7 @@ Options are passed as CLI flags.
 - `--out <file>`: redirect output to the given file
 - `--pretty`: format the JSON output to be more human readable
 - `--metadata`: include additional metadata for each style
-- `--id <file_id>`: fetch the specified Figma document from the Figma API
+- `--fetch <file_id>`: fetch the specified Figma document from the Figma API
 
 For a full list of options, run `figma-theme --help`.
 

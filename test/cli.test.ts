@@ -79,7 +79,7 @@ describe("[slow] CLI", function() {
   //       return fs.createReadStream(fixtureFile)
   //     })
 
-  //   const result = await execute(`--id ${figmaFileId}`, { FIGMA_TOKEN: "figma_token" })
+  //   const result = await execute(`--fetch ${figmaFileId}`, { FIGMA_TOKEN: "figma_token" })
   //   scope.done()
   //   assert.equal(result.code, 0)
   //   assert.equal(result.stderr, "")
@@ -108,14 +108,14 @@ describe("[slow] CLI", function() {
   })
 
   it("errors when fetching from network and FIGMA_TOKEN is not set", async () => {
-    const result = await execute("--id asdf", { FIGMA_TOKEN: "" })
+    const result = await execute("--fetch asdf", { FIGMA_TOKEN: "" })
     assert.equal(result.code, 1)
     assert.equal(result.stdout, "")
     assert.match(result.stderr, /FIGMA_TOKEN environment variable/)
   })
 
   it("errors when specifying both a Figma file ID and a local file", async () => {
-    const result = await execute("--id asdf ./some_file", { FIGMA_TOKEN: "token" })
+    const result = await execute("--fetch asdf ./some_file", { FIGMA_TOKEN: "token" })
     assert.equal(result.code, 1)
     assert.equal(result.stdout, "")
     assert.match(result.stderr, /may not specify an input file/)
