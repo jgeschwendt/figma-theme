@@ -1,41 +1,143 @@
+# @primer/figma-theme
 
-# figma-theme
+Generate a JSON representation of style colors from a Figma file. Forked from [jxnblk/figma-theme][fork], which was created by [Brent Jackson][brent].
 
-Generate development-ready theme JSON files from Figma Styles
+## Installation
 
-- Parse [Styles][] from a Figma file ID
-- Works with [Styled System][] and other CSS-in-JS setups
-- Built with [figma-js][]
+`@primer/figma-theme` requires [Node.js][nodejs] 11.0 or higher.
+
+To use the command-line API, you may want to install the package globally:
 
 ```sh
-npm i figma-theme
+# with npm
+npm i -g @primer/figma-theme
+
+# with yarn
+yarn global add @primer/figma-theme
 ```
 
-## Getting Started
+If you plan on using the package as part of another Node.js project, you can install it to your dependencies:
 
-1. Install `figma-theme` as a dev dependency in your project
-2. Get a [personal access token][token] for the Figma API
-3. Create a `.env` file with your access token
-  - `FIGMA_TOKEN=<personal-access-token>`
-  - Alternatively add an environment variable for `FIGMA_TOKEN`
-4. Add an npm run script: `figma-theme <figma-file-id>`
-5. Run the script to create a `theme.json` file based on Figma Styles
+```sh
+# with npm
+npm i @primer/figma-theme
+
+# with yarn
+yarn add @primer/figma-theme
+```
+
+If you've installed the package as a local dependency, you can run the binary with:
+
+```sh
+./node_modules/.bin/figma-theme
+```
+
+## Basic usage
+
+The CLI can parse JSON created from the [Figma API][api] and outputs JSON data to standard output.
+
+### Local files
+
+To parse a JSON file created from the Figma API, pass the filename of the JSON file to the command:
+
+```sh
+figma-theme my-figma-export.json
+```
+
+You can also use `-` to specify stdin as the source for the JSON data:
+
+```sh
+./my-export-script.sh | figma-theme -
+```
+
+### Download from the Figma API
+
+If you specify your Figma [personal access token][token] via an environment variable or a `.env` file, the CLI can contact the Figma API and export the file for you:
+
+```sh
+# using an environment variable
+FIGMA_TOKEN=asdf1234 figma-theme ...
+
+# using a .env file
+echo "FIGMA_TOKEN=asdf1234" > .env
+figma-theme ...
+```
+
+To specify which file to export, use the `--fetch` option to specify a Figma file ID:
+
+```sh
+FIGMA_TOKEN=asdf1234 figma-theme --fetch xRlnI4wD4TEQGzOERdUfJz
+```
+
+To identify the Figma file ID, look at the part of the URL after `/file/`. For example, in the URL:
+
+```
+https://www.figma.com/file/abcdef123456/My-Figma-File
+```
+
+the ID is `abcdef123456`.
+
+## Figma styles
+
+The styles in your Figma file must adhere to the following rules:
+
+- Create a nested structure by using `/` in your style names, e.g. `functional / text / primary` (spaces are optional)
+- Your style names must not contain a period
+- Every style you want to be a part of your theme must be used in the file; if a style is unused, its color will be `null`
 
 ## Options
 
-Options can be passed as CLI flags or included in a `figma-theme` object in your `package.json`
+Options are passed as CLI flags.
 
-- `--out-dir`: output directory (default current working directory)
-- `--metadata`: include additional metadata from the Figma API
+- `--out <file>`: redirect output to the given file
+- `--pretty`: format the JSON output to be more human readable
+- `--metadata`: include additional metadata for each style
+- `--fetch <file_id>`: fetch the specified Figma document from the Figma API
 
-[Styles]: https://help.figma.com/properties-panel/styles
-[Styled System]: https://jxnblk.com/styled-system
+For a full list of options, run `figma-theme --help`.
+
+## Example
+
+```sh
+$ figma-theme --pretty test/fixtures/figma-file.json
+
+{
+  "functional": {
+    "fill": {
+      "red": "#ff0000",
+      "blue": "#0085ff",
+      "blue-alpha": "rgba(0,133,255,0.7)",
+      "gray": null,
+    }
+  },
+  "borders": {
+    "green": "#007521",
+    "orange": "#ff7a00",
+    "black-fade-30": "rgba(0,0,0,0.3)",
+  }
+}
+```
+
+## Local development
+
+To develop locally, clone the repository and install the dependencies with [Yarn][yarn].
+
+```sh
+# install dependencies
+yarn install
+
+# run tests
+yarn test
+
+# run the CLI
+./node_modules/.bin/ts-node ./src/cli-boot.ts --help
+# OR
+yarn cli --help
+```
+
+[fork]: https://github.com/jxnblk/figma-theme
+[brent]: https://github.com/jxnblk
+[nodejs]: https://nodejs.org
+[api]: https://www.figma.com/developers/api#files-endpoints
 [token]: https://www.figma.com/developers/docs#auth-dev-token
-[figma-js]: https://github.com/jongold/figma-js
-
-<!--
-- TRi6YSk76405ImoatoMF1u28
-- 2aMG4hw2qp3jSTGmtAMyhZ
-- JGLoPfwRFqCwn4xZ8wUmSwp7
-- Yw9L6FATzLpdcsnA5vdSgCRT
--->
+[yarn]: https://yarnpkg.com/
