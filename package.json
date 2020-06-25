@@ -1,6 +1,6 @@
 {
   "name": "@primer/figma-theme",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Generate development-ready theme JSON files from Figma Styles",
   "main": "./src/index.ts",
   "bin": {
