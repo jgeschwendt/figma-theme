@@ -85,11 +85,12 @@ The styles in your Figma file must adhere to the following rules:
 
 ## Options
 
-Options can be passed as CLI flags or included in a `figma-theme` object in your `package.json`
+Options are passed as CLI flags.
 
 - `--out <file>`: redirect output to the given file
 - `--pretty`: format the JSON output to be more human readable
 - `--metadata`: include additional metadata for each style
+- `--id <file_id>`: fetch the specified Figma document from the Figma API
 
 For a full list of options, run `figma-theme --help`.
 
