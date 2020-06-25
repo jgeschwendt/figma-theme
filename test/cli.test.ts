@@ -11,12 +11,11 @@ interface CliResult {
   code: number | null
 }
 
-const cmdPath = path.resolve(__dirname, '..', 'bin', 'cli-boot.js')
-const fixtureFile = path.resolve(__dirname, 'fixtures', 'figma-file.json')
+const cmdPath = path.resolve(__dirname, '..', 'src', 'cli-boot.ts')
 
 async function execute(args: string, env: NodeJS.ProcessEnv = {}): Promise<CliResult> {
   return new Promise((resolve, reject) => {
-    const cp = exec(`${cmdPath} ${args}`, {
+    const cp = exec(`./node_modules/.bin/ts-node ${cmdPath} ${args}`, {
       cwd: path.join(__dirname, ".."),
       env: {...process.env, ...env},
     }, (_err, stdout, stderr) => {
@@ -68,6 +67,7 @@ describe("[slow] CLI", function() {
   // necessary exit hooks and spies to ensure that it does the right thing.
 
   // it("downloads data from the Figma API", async () => {
+  //   const fixtureFile = path.resolve(__dirname, 'fixtures', 'figma-file.json')
   //   const figmaFileId = "xRlnI4wD4TEQGzOERdUfJz"
   //   const scope = nock('https://api.figma.com', {
   //     reqheaders: {
