@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
 require('ts-node').register()
-require('../src/cli').default()
+require('../src/cli.ts').default()
