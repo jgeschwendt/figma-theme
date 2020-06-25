@@ -1,4 +1,8 @@
 #!/usr/bin/env node
 
-require('ts-node').register()
+const path = require('path')
+
+require('ts-node').register({
+  "dir": path.resolve(__dirname, "..")
+})
 require('../src/cli.ts').default()
