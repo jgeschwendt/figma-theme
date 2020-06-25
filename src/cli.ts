@@ -7,6 +7,10 @@ import { Options } from './options'
 import { parseData, stripMetadata } from './index'
 const pkg = require('../package.json')
 
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
 const program = new Command('figma-theme')
 program
   .storeOptionsAsProperties(false)
