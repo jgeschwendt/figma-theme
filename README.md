@@ -135,7 +135,7 @@ yarn test
 
 [fork]: https://github.com/jxnblk/figma-theme
 [brent]: https://github.com/jxnblk
-[node]: https://nodejs.org
+[nodejs]: https://nodejs.org
 [api]: https://www.figma.com/developers/api#files-endpoints
 [token]: https://www.figma.com/developers/docs#auth-dev-token
 [yarn]: https://yarnpkg.com/
